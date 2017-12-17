@@ -1,0 +1,14 @@
+{
+    "name"         : "bluuki-scan-noble",
+    "version"      : "0.0.1",
+    "description"  : "A node for scanning Bluuki Beacons",
+    "dependencies": {
+	"noble": ">=0.2.7"
+    },
+    "keywords": [ "node-red", "blukii" ],
+    "node-red"     : {
+        "nodes": {
+            "sample": "my-noble-scan/my-noble-scan.js"
+        }
+    }
+}

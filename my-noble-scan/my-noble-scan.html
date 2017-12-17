@@ -1,0 +1,62 @@
+
+<script type="text/x-red" data-template-name="bluuki_scan_noble">
+
+    <!-- Limit to list of UUIDs -->
+    <div class="form-row">
+        <label for="node-input-uuids"><i class="fa fa-tasks"></i> Restrict by Service UUID</label>
+        <input type="text" id="node-input-uuids" placeholder="Comma separated list">
+    </div>
+    <div class="form-tips">Leave empty for scanning all devices offering any service.</div>
+
+    <!-- Allow duplicates -->
+    <div class="form-row">
+        <label>&nbsp;</label>
+        <input type="checkbox" id="node-input-duplicates" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-duplicates" style="width: 70%;">Allow duplicates?</label>
+    </div>
+
+    <!-- By convention, most nodes have a 'name' property. The following div -->
+    <!-- provides the necessary field. Should always be the last option      -->
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+</script>
+
+
+<!-- Next, some simple help text is provided for the node.-->
+<script type="text/x-red" data-help-name="bluuki_scan_noble">
+   <p> Test</p>
+</script>
+
+<!-- Finally, the node type is registered along with all of its properties   -->
+<!-- The example below shows a small subset of the properties that can be set-->
+
+<script type="text/javascript">
+
+    RED.nodes.registerType('bluuki_scan_noble',{
+        category: 'advanced',      // the palette category
+        color:"#C0DEED",
+        defaults: {             // defines the editable properties of the node
+            uuids: {value:"", validate:RED.validators.regex(/^([a-fA-F0-9]{32}){0,1}(?:,[a-fA-F0-9]{32})*$/)},
+            duplicates: {value:false},
+            name: {value:""}
+        },
+        inputs:1,               // set the number of inputs - only 0 or 1
+        outputs:1,              // set the number of outputs - 0 to n
+        // set the icon (held in icons dir below where you save the node)
+        icon: "bluetooth.png",     // saved in  icons/myicon.png
+        label: function() {     // sets the default label contents
+            if (this.name) {
+                return this.name;
+            } else {
+                return "Bluuki scan";
+            }
+        },
+        labelStyle: function() { // sets the class to apply to the label
+            return this.name ? "node_label_italic" : "";
+        }
+    });
+</script>
